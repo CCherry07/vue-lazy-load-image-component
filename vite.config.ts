@@ -1,5 +1,7 @@
-import vue from '@vitejs/plugin-vue'
-
-export default {
-  plugins: [vue()],
-}
+import { defineConfig } from 'vite'
+// @ts-ignore
+import vueJsx from '@vitejs/plugin-vue-jsx'
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vueJsx()],
+})

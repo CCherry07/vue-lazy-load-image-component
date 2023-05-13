@@ -27,6 +27,10 @@ const PlaceholderWithTracking = defineComponent({
     width: {
       type: Number,
       default: 0
+    },
+    placeholder:{
+      type: Object,
+      default: () => { }
     }
   },
   setup(props, { attrs }) {

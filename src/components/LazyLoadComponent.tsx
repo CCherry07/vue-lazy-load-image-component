@@ -1,4 +1,4 @@
-import { reactive, computed, watch, defineComponent } from 'vue'
+import { reactive, computed, watch, defineComponent, Fragment } from 'vue'
 import PlaceholderWithoutTracking from './PlaceholderWithoutTracking.tsx'
 import isIntersectionObserverAvailable from '../utils/intersection-observer';
 import PlaceholderWithTracking from './PlaceholderWithTracking.tsx'
@@ -18,7 +18,9 @@ import PlaceholderWithTracking from './PlaceholderWithTracking.tsx'
 //   threshold: number
 // }
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'LazyLoadComponent',
+  inheritAttrs: false,
   props: {
     afterLoad: {
       type: Function,
@@ -72,9 +74,8 @@ export default defineComponent({
       type: Object,
       default: () => { }
     }
-
   },
-  setup(props, { slots, attrs }) {
+  setup(props, { slots }) {
     const state = reactive({
       visible: props.visibleByDefault ?? false,
       loaded: false,
@@ -98,7 +99,6 @@ export default defineComponent({
     )
 
     const onVisible = () => {
-      if (state.loaded) return
       state.loaded = true
       state.visible = true
       props.afterLoad?.()
@@ -108,37 +108,31 @@ export default defineComponent({
       props.afterLoad?.()
       props.afterLoad?.()
     }
-
     return () => {
+      if (state.visible) {
+        return slots.default?.() 
+      }
       return isScrollTracked ||
         (props.useIntersectionObserver && isIntersectionObserverAvailable()) ?
-        <>
-          <PlaceholderWithoutTracking
-            height={props.height}
-            onVisible={onVisible}
-            // placeholder={props.placeholder}
-            scrollPosition={props.scrollPosition}
-            threshold={props.threshold}
-            useIntersectionObserver={props.useIntersectionObserver}
-            width={props.width}
-          >
-            {slots.default?.()}
-          </PlaceholderWithoutTracking>
-        </>
+        <PlaceholderWithoutTracking
+          height={props.height}
+          onVisible={onVisible}
+          placeholder={props.placeholder}
+          scrollPosition={props.scrollPosition}
+          threshold={props.threshold}
+          useIntersectionObserver={props.useIntersectionObserver}
+          width={props.width}
+        />
         :
-        <>
-          <PlaceholderWithTracking
-            height={props.height}
-            onVisible={onVisible}
-            // placeholder={props.placeholder}
-            scrollPosition={props.scrollPosition}
-            threshold={props.threshold}
-            useIntersectionObserver={props.useIntersectionObserver}
-            width={props.width}
-          >
-            {slots.default?.()}
-          </PlaceholderWithTracking>
-        </>
+        <PlaceholderWithTracking
+          height={props.height}
+          onVisible={onVisible}
+          placeholder={props.placeholder}
+          scrollPosition={props.scrollPosition}
+          threshold={props.threshold}
+          useIntersectionObserver={props.useIntersectionObserver}
+          width={props.width}
+        />
     }
   }
 })

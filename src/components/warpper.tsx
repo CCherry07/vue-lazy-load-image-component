@@ -39,6 +39,10 @@ export const WrappedComponent = (Component: any) => {
       delayTime: {
         type: Number,
         default: 300
+      },
+      placeholder: {
+        type: Object,
+        default: () => { }
       }
     },
     setup(props, { attrs }) {

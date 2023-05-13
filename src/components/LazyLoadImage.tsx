@@ -3,6 +3,7 @@ import LazyLoadComponent from './LazyLoadComponent.jsx';
 
 export default defineComponent({
   name: 'LazyLoadImage',
+  compatConfig: { MODE: 3 },
   props: {
     afterLoad: {
       type: Function,

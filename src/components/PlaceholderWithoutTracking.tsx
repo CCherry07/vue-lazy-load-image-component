@@ -43,6 +43,10 @@ export default defineComponent({
     width: {
       type: Number,
       default: 0
+    },
+    placeholder: {
+      type: Object,
+      default: () => { }
     }
   },
   setup(props, { slots }) {
@@ -75,7 +79,6 @@ export default defineComponent({
       if (typeof window === 'undefined' || placeholder.value) {
         return false;
       }
-
       const boundingBox = getPlaceholderBoundingBox(props.scrollPosition);
       const viewport = {
         bottom: props.scrollPosition.y + window.innerHeight,
@@ -121,7 +124,7 @@ export default defineComponent({
           ref={placeholder}
           style={styleProp.value}
         >
-          {slots.default?.()}
+          {props.placeholder}
         </span>
       )
     }

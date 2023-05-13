@@ -99,13 +99,12 @@ export default defineComponent({
     )
 
     const onVisible = () => {
-      state.loaded = true
       state.visible = true
       props.afterLoad?.()
     }
 
     if (props.visibleByDefault) {
-      props.afterLoad?.()
+      props.beforeLoad?.()
       props.afterLoad?.()
     }
     return () => {

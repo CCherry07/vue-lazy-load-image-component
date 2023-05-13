@@ -4,6 +4,7 @@ import LazyLoadComponent from './LazyLoadComponent.jsx';
 export default defineComponent({
   name: 'LazyLoadImage',
   compatConfig: { MODE: 3 },
+  inheritAttrs: false,
   props: {
     afterLoad: {
       type: Function,
@@ -81,7 +82,7 @@ export default defineComponent({
   setup(props, { attrs }) {
     const loaded = ref(false);
     function onImageLoad() {
-      if (!loaded.value) {
+      if (loaded.value) {
         return null
       }
       return () => {
@@ -135,28 +136,30 @@ export default defineComponent({
         </LazyLoadComponent>
       )
     }
-
+    const loadedClassName = computed(() => loaded.value ? ' lazy-load-image-loaded' : '')
+    const wrapperBackground = computed(() => {
+      if (loaded.value || !props.placeholderSrc) {
+        return {}
+      }
+      return {
+        backgroundImage: `url(${props.placeholderSrc})`,
+        backgroundSize: '100% 100%',
+      }
+    })
     function getWrappedLazyLoadImage(lazyLoadImage: any) {
-      const wrapperBackground =
-        loaded.value || !props.placeholderSrc
-          ? {}
-          : {
-            backgroundImage: `url(${props.placeholderSrc})`,
-            backgroundSize: '100% 100%',
-          };
       return (
         <span
           class={
             props.wrapperClassName +
             ' lazy-load-image-background ' +
-            props.effect + props.loadedClassName
+            props.effect + loadedClassName.value
           }
           style={{
-            ...wrapperBackground,
+            ...wrapperBackground.value,
             color: 'transparent',
             display: 'inline-block',
-            height: props.height,
-            width: props.width,
+            height: props.height + 'px',
+            width: props.width + 'px',
           }}
           {...props.wrapperProps}
         >

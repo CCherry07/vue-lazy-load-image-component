@@ -4,7 +4,7 @@ import isIntersectionObserverAvailable from '../utils/intersection-observer';
 import getScrollAncestor from '../utils/get-scroll-ancestor';
 import { getScrollX, getScrollY } from "../utils";
 
-export const WrappedComponent = (Component: any) => {
+export const trackWindowScroll = (Component: any) => {
   const ScrollAwareComponent = defineComponent({
     name: "ScrollAwareComponent",
     props: {
@@ -105,3 +105,6 @@ export const WrappedComponent = (Component: any) => {
   })
   return ScrollAwareComponent;
 }
+
+
+export default trackWindowScroll;

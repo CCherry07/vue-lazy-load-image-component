@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { WrappedComponent } from './warpper.tsx'
+import { trackWindowScroll } from './trackWindowScroll.tsx'
 import PlaceholderWithoutTracking from './PlaceholderWithoutTracking'
 const PlaceholderWithTracking = defineComponent({
   name: 'PlaceholderWithTracking',
@@ -40,4 +40,4 @@ const PlaceholderWithTracking = defineComponent({
   }
 })
 
-export default WrappedComponent(PlaceholderWithTracking)
+export default trackWindowScroll(PlaceholderWithTracking)

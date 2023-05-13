@@ -49,7 +49,7 @@ export default defineComponent({
       default: () => { }
     }
   },
-  setup(props, { slots }) {
+  setup(props) {
     const placeholder = shallowRef<HTMLElement>()
     const supportsObserver = computed(() => !props.scrollPosition &&
       props.useIntersectionObserver &&

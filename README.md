@@ -11,22 +11,23 @@ $ npm i --save vue-lazy-load-image-component
 
 ## `LazyLoadImage` usage
 
-```javascript
-import React from 'react';
-import { LazyLoadImage } from 'vue-lazy-load-image-component';
-
-const MyImage = ({ image }) => (
+```vue
+<template>
   <div>
-    <LazyLoadImage
-      alt={image.alt}
-      height={image.height}
-      src={image.src} // use normal <img> attributes as props
-      width={image.width} />
-    <span>{image.caption}</span>
+    <MyImage :image="image" />
+    <span>{{image.caption}}</span>
   </div>
-);
-
-export default MyImage;
+</template>
+<script lang='ts' setup>
+import { LazyLoadImage } from 'vue-lazy-load-image-component';
+const image = ref({
+  alt: 'My image',
+  height: 100,
+  src: 'https://example.com/image.jpg',
+  width: 100,
+  caption: 'My image caption',
+});
+</script>
 ```
 
 ### Props

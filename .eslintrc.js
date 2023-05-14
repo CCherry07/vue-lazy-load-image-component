@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['prettier', 'plugin:prettier/recommended'],
+  extends: ['plugin:vue/vue3-recommended', 'prettier', 'plugin:prettier/recommended'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',

@@ -221,3 +221,7 @@ const GalleryWithScrollTracking = trackWindowScroll(Gallery);
 
 </script>
 ```
+
+## reference
+
+  [react-lazy-load-image-component]('https://github.com/Aljullu/react-lazy-load-image-component')

@@ -1,54 +1,16 @@
-import type { PropType } from 'vue'
 import { computed, defineComponent, onMounted, reactive, shallowRef, watch, onBeforeUnmount } from "vue";
 import { debounce, throttle } from 'lodash-es';
 import isIntersectionObserverAvailable from '../utils/intersection-observer';
 import getScrollAncestor from '../utils/get-scroll-ancestor';
 import { getScrollX, getScrollY } from "../utils";
-import { ScrollPosition, VueNode } from "./interface";
+import { LazyLoadComponentPropsFunc } from './interface';
 
 export type TrackWindowScroll = (Component: ReturnType<typeof defineComponent>) => ReturnType<typeof defineComponent>
 
 export const trackWindowScroll: TrackWindowScroll = (Component) => {
   const ScrollAwareComponent = defineComponent({
     name: "ScrollAwareComponent",
-    props: {
-      scrollPosition: {
-        type: Object as PropType<ScrollPosition>,
-        default: null
-      },
-      useIntersectionObserver: {
-        type: Boolean,
-        default: true
-      },
-      threshold: {
-        type: Number,
-        default: 300
-      },
-      onVisible: {
-        type: Function as PropType<() => void>,
-        default: () => { }
-      },
-      height: {
-        type: Number,
-        default: 0
-      },
-      width: {
-        type: Number,
-        default: 0
-      },
-      delayMethod: {
-        type: String as PropType<'debounce' | 'throttle'>,
-        default: 'throttle'
-      },
-      delayTime: {
-        type: Number,
-        default: 300
-      },
-      placeholder: {
-        type: Object as PropType<VueNode>,
-        default: () => { }
-      }
-    },
+    props: LazyLoadComponentPropsFunc(),
     setup(props, { attrs }) {
       const useIntersectionObserver = computed(() => props.useIntersectionObserver && isIntersectionObserverAvailable())
       const baseComponentRef = shallowRef(null)

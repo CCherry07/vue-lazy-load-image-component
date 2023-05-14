@@ -17,7 +17,7 @@ specifiers:
   vite: ^4.3.5
   vite-plugin-dts: ^2.3.0
   vue: ^3.3.2
-  vue-lazy-load-image-component: 0.0.3
+  vue-lazy-load-image-component: 0.0.4
 
 dependencies:
   '@vitejs/plugin-vue': 4.2.3_vite@4.3.5+vue@3.3.2
@@ -29,7 +29,7 @@ dependencies:
   vite: 4.3.5
   vite-plugin-dts: 2.3.0_vite@4.3.5
   vue: 3.3.2
-  vue-lazy-load-image-component: 0.0.3
+  vue-lazy-load-image-component: 0.0.4
 
 devDependencies:
   '@types/jest': 29.5.1
@@ -3477,6 +3477,30 @@ packages:
       vite-plugin-dts: 2.3.0_vite@4.3.5
       vue: 3.3.2
       vue-lazy-load-image-component: 0.0.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - rollup
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: false
+
+  /vue-lazy-load-image-component/0.0.4:
+    resolution: {integrity: sha512-4554HX7b490FxRmtcVhME1gXhdSq/Nj+XcvT4BHeihzi8aJBMqndXtzdSJqDablkSTEEfVr0yhyCUA8NWtRLEA==}
+    dependencies:
+      '@vitejs/plugin-vue': 4.2.3_vite@4.3.5+vue@3.3.2
+      babel: 6.23.0
+      eslint: 8.40.0
+      lodash-es: 4.17.21
+      mockjs: 1.1.0
+      typescript: 5.0.4
+      vite: 4.3.5
+      vite-plugin-dts: 2.3.0_vite@4.3.5
+      vue: 3.3.2
+      vue-lazy-load-image-component: 0.0.3
     transitivePeerDependencies:
       - '@types/node'
       - less

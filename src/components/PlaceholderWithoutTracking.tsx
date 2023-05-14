@@ -1,42 +1,13 @@
-import type { PropType } from 'vue'
+import type { DefineComponent } from 'vue'
 import { computed, onMounted, shallowRef, defineComponent } from 'vue'
 
 import isIntersectionObserverAvailable from '../utils/intersection-observer'
 import { getObserver } from '../utils'
-import { ScrollPosition, VueNode } from './interface'
+import { PlaceholderWithoutTrackingPropsFunc } from './interface'
 
 export default defineComponent({
   name: 'PlaceholderWithoutTracking',
-  props: {
-    scrollPosition: {
-      type: Object as PropType<ScrollPosition>,
-      default: null
-    },
-    useIntersectionObserver: {
-      type: Boolean,
-      default: true
-    },
-    threshold: {
-      type: Number,
-      default: 300
-    },
-    onVisible: {
-      type: Function as PropType<() => void>,
-      default: () => { }
-    },
-    height: {
-      type: Number,
-      default: 0
-    },
-    width: {
-      type: Number,
-      default: 0
-    },
-    placeholder: {
-      type: Object as PropType<VueNode>,
-      default: () => { }
-    }
-  },
+  props: PlaceholderWithoutTrackingPropsFunc(),
   setup(props) {
     const placeholder = shallowRef<HTMLElement>()
     const supportsObserver = computed(() => !props.scrollPosition &&
@@ -117,4 +88,4 @@ export default defineComponent({
       )
     }
   }
-})
+}) as DefineComponent<ReturnType<typeof PlaceholderWithoutTrackingPropsFunc>>

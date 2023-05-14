@@ -1,3 +1,4 @@
+import { DefineComponent } from 'vue'
 import { reactive, computed, watch, defineComponent, ExtractPropTypes } from 'vue'
 import PlaceholderWithoutTracking from './PlaceholderWithoutTracking.tsx'
 import isIntersectionObserverAvailable from '../utils/intersection-observer';
@@ -70,5 +71,5 @@ export default defineComponent({
         />
     }
   }
-})
+}) as DefineComponent<LazyLoadComponentProps>
 

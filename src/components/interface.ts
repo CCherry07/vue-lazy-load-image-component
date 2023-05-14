@@ -39,7 +39,7 @@ export const LazyLoadComponentPropsFunc = () => ({
     default: 300
   },
   style: {
-    type: Object as PropType<CSSProperties>,
+    type: Object as PropType<Partial<CSSProperties>>,
     default: () => { }
   },
   class: {
@@ -88,3 +88,66 @@ export const LazyLoadImagePropsFunc = () => {
     },
   }
 }
+
+export const PlaceholderWithoutTrackingPropsFunc = () => ({
+  scrollPosition: {
+    type: Object as PropType<ScrollPosition>,
+    default: null
+  },
+  useIntersectionObserver: {
+    type: Boolean,
+    default: true
+  },
+  threshold: {
+    type: Number,
+    default: 300
+  },
+  onVisible: {
+    type: Function as PropType<() => void>,
+    default: () => { }
+  },
+  height: {
+    type: Number,
+    default: 100
+  },
+  width: {
+    type: Number,
+    default: 100
+  },
+  placeholder: {
+    type: Object as PropType<VueNode>,
+    default: () => { }
+  }
+})
+
+
+export const PlaceholderWithTrackingPropsFunc = () => ({
+  scrollPosition: {
+    type: Object as PropType<ScrollPosition>,
+    default: null
+  },
+  useIntersectionObserver: {
+    type: Boolean,
+    default: true
+  },
+  threshold: {
+    type: Number,
+    default: 300
+  },
+  onVisible: {
+    type: Function as PropType<() => void>,
+    default: () => { }
+  },
+  height: {
+    type: Number,
+    default: 0
+  },
+  width: {
+    type: Number,
+    default: 0
+  },
+  placeholder: {
+    type: Object as PropType<VueNode>,
+    default: () => { }
+  }
+})

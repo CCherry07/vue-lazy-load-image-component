@@ -31,7 +31,7 @@
     "vite": "^4.3.5",
     "vite-plugin-dts": "^2.3.0",
     "vue": "^3.3.2",
-    "vue-lazy-load-image-component": "0.0.3"
+    "vue-lazy-load-image-component": "0.0.4"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",

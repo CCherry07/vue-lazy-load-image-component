@@ -3,7 +3,7 @@ import { ExtractPropTypes, computed, defineComponent, ref } from 'vue';
 import LazyLoadComponent from './LazyLoadComponent.jsx';
 import { LazyLoadImagePropsFunc } from './interface.js';
 
-export type LazyLoadImageProps = Partial<ExtractPropTypes<ReturnType<typeof LazyLoadImagePropsFunc>>> & Partial<HTMLImageElement>
+export type LazyLoadImageProps = Partial<ExtractPropTypes<ReturnType<typeof LazyLoadImagePropsFunc>>> & Partial<Omit<HTMLImageElement, 'style'>>
 
 const LazyLoadImage = defineComponent({
   name: 'LazyLoadImage',

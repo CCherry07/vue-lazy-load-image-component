@@ -1,84 +1,14 @@
-import { computed, defineComponent, ref } from 'vue';
+import { ExtractPropTypes, computed, defineComponent, ref } from 'vue';
 import LazyLoadComponent from './LazyLoadComponent.jsx';
+import { LazyLoadImagePropsFunc } from './interface.js';
+
+export type LazyLoadImageProps = Partial<ExtractPropTypes<ReturnType<typeof LazyLoadImagePropsFunc>>> & HTMLImageElement
 
 export default defineComponent({
   name: 'LazyLoadImage',
   compatConfig: { MODE: 3 },
   inheritAttrs: false,
-  props: {
-    afterLoad: {
-      type: Function,
-      default: () => { }
-    },
-    beforeLoad: {
-      type: Function,
-      default: () => { }
-    },
-    scrollPosition: {
-      type: Object,
-      default: null
-    },
-    visibleByDefault: {
-      type: Boolean,
-      default: false
-    },
-    height: {
-      type: Number,
-      default: 0
-    },
-    width: {
-      type: Number,
-      default: 0
-    },
-    useIntersectionObserver: {
-      type: Boolean,
-      default: true
-    },
-    threshold: {
-      type: Number,
-      default: 300
-    },
-    placeholderSrc: {
-      type: String,
-      default: ''
-    },
-    effect: {
-      type: String,
-      default: ''
-    },
-    loadedClassName: {
-      type: String,
-      default: ''
-    },
-    wrapperClassName: {
-      type: String,
-      default: ''
-    },
-    wrapperProps: {
-      type: Object,
-      default: () => { }
-    },
-    delayTime: {
-      type: Number,
-      default: 300
-    },
-    delayMethod: {
-      type: String,
-      default: 'debounce'
-    },
-    placeholder: {
-      type: Object,
-      default: null
-    },
-    class: {
-      type: String,
-      default: ''
-    },
-    style: {
-      type: Object,
-      default: () => { }
-    }
-  },
+  props: LazyLoadImagePropsFunc(),
   setup(props, { attrs }) {
     const loaded = ref(false);
     function onImageLoad() {

@@ -1,27 +1,15 @@
-// import type { CSSProperties } from 'vue'
+import type { PropType } from 'vue'
 import { computed, onMounted, shallowRef, defineComponent } from 'vue'
 
 import isIntersectionObserverAvailable from '../utils/intersection-observer'
 import { getObserver } from '../utils'
-// interface ScrollPosition {
-//   x: number
-//   y: number
-// }
-// interface Props {
-//   scrollPosition: ScrollPosition
-//   useIntersectionObserver: boolean
-//   threshold: number
-//   onVisible: () => void
-//   style: CSSProperties
-//   height: number
-//   width: number
-// }
+import { ScrollPosition, VueNode } from './interface'
 
 export default defineComponent({
   name: 'PlaceholderWithoutTracking',
   props: {
     scrollPosition: {
-      type: Object,
+      type: Object as PropType<ScrollPosition>,
       default: null
     },
     useIntersectionObserver: {
@@ -33,7 +21,7 @@ export default defineComponent({
       default: 300
     },
     onVisible: {
-      type: Function,
+      type: Function as PropType<() => void>,
       default: () => { }
     },
     height: {
@@ -45,7 +33,7 @@ export default defineComponent({
       default: 0
     },
     placeholder: {
-      type: Object,
+      type: Object as PropType<VueNode>,
       default: () => { }
     }
   },

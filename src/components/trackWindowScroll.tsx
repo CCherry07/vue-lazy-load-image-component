@@ -1,15 +1,19 @@
+import type { PropType } from 'vue'
 import { computed, defineComponent, onMounted, reactive, shallowRef, watch, onBeforeUnmount } from "vue";
 import { debounce, throttle } from 'lodash-es';
 import isIntersectionObserverAvailable from '../utils/intersection-observer';
 import getScrollAncestor from '../utils/get-scroll-ancestor';
 import { getScrollX, getScrollY } from "../utils";
+import { ScrollPosition, VueNode } from "./interface";
 
-export const trackWindowScroll = (Component: any) => {
+export type TrackWindowScroll = (Component: ReturnType<typeof defineComponent>) => ReturnType<typeof defineComponent>
+
+export const trackWindowScroll: TrackWindowScroll = (Component) => {
   const ScrollAwareComponent = defineComponent({
     name: "ScrollAwareComponent",
     props: {
       scrollPosition: {
-        type: Object,
+        type: Object as PropType<ScrollPosition>,
         default: null
       },
       useIntersectionObserver: {
@@ -21,7 +25,7 @@ export const trackWindowScroll = (Component: any) => {
         default: 300
       },
       onVisible: {
-        type: Function,
+        type: Function as PropType<() => void>,
         default: () => { }
       },
       height: {
@@ -33,15 +37,15 @@ export const trackWindowScroll = (Component: any) => {
         default: 0
       },
       delayMethod: {
-        type: String,
-        default: 'debounce'
+        type: String as PropType<'debounce' | 'throttle'>,
+        default: 'throttle'
       },
       delayTime: {
         type: Number,
         default: 300
       },
       placeholder: {
-        type: Object,
+        type: Object as PropType<VueNode>,
         default: () => { }
       }
     },

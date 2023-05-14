@@ -1,80 +1,16 @@
-import { reactive, computed, watch, defineComponent } from 'vue'
+import { reactive, computed, watch, defineComponent, ExtractPropTypes } from 'vue'
 import PlaceholderWithoutTracking from './PlaceholderWithoutTracking.tsx'
 import isIntersectionObserverAvailable from '../utils/intersection-observer';
 import PlaceholderWithTracking from './PlaceholderWithTracking.tsx'
-// interface ScrollPosition {
-//   x: number
-//   y: number
-// }
-// interface Props {
-//   afterLoad?: () => void
-//   beforeLoad?: () => void
-//   scrollPosition: ScrollPosition
-//   visibleByDefault?: boolean
-//   style: CSSProperties
-//   height: number
-//   width: number
-//   useIntersectionObserver: any
-//   threshold: number
-// }
+import { LazyLoadComponentPropsFunc } from "./interface.ts";
+
+export type LazyLoadComponentProps = Partial<ExtractPropTypes<ReturnType<typeof LazyLoadComponentPropsFunc>>>
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'LazyLoadComponent',
   inheritAttrs: false,
-  props: {
-    afterLoad: {
-      type: Function,
-      default: () => { }
-    },
-    beforeLoad: {
-      type: Function,
-      default: () => { }
-    },
-    scrollPosition: {
-      type: Object,
-      default: null
-    },
-    visibleByDefault: {
-      type: Boolean,
-      default: false
-    },
-    height: {
-      type: Number,
-      default: 0
-    },
-    width: {
-      type: Number,
-      default: 0
-    },
-    useIntersectionObserver: {
-      type: Boolean,
-      default: true
-    },
-    threshold: {
-      type: Number,
-      default: 300
-    },
-    style: {
-      type: Object,
-      default: () => { }
-    },
-    class: {
-      type: String,
-      default: ''
-    },
-    delayMethod: {
-      type: String,
-      default: 'throttle'
-    },
-    delayTime: {
-      type: Number,
-      default: 300
-    },
-    placeholder: {
-      type: Object,
-      default: () => { }
-    }
-  },
+  props: LazyLoadComponentPropsFunc(),
   setup(props, { slots }) {
     const state = reactive({
       visible: props.visibleByDefault ?? false,
@@ -109,7 +45,7 @@ export default defineComponent({
     }
     return () => {
       if (state.visible) {
-        return slots.default?.() 
+        return slots.default?.()
       }
       return isScrollTracked ||
         (props.useIntersectionObserver && isIntersectionObserverAvailable()) ?

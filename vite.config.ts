@@ -1,9 +1,16 @@
 import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 // @ts-ignore
 import vueJsx from '@vitejs/plugin-vue-jsx'
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vueJsx()],
+  plugins: [dts({
+    insertTypesEntry: true,
+    cleanVueFileName: true,
+    outputDir: 'lib',
+    staticImport: true,
+    exclude: ['**/__tests__/**/*', '**/__mocks__/**/*'],
+  }),vueJsx()],
   build: {
     lib: {
       entry: 'src/index.ts',

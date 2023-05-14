@@ -1,11 +1,12 @@
-import { defineComponent } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import { trackWindowScroll } from './trackWindowScroll.tsx'
 import PlaceholderWithoutTracking from './PlaceholderWithoutTracking'
+import { ScrollPosition, VueNode } from './interface.ts'
 const PlaceholderWithTracking = defineComponent({
   name: 'PlaceholderWithTracking',
   props: {
     scrollPosition: {
-      type: Object,
+      type: Object as PropType<ScrollPosition>,
       default: null
     },
     useIntersectionObserver: {
@@ -17,7 +18,7 @@ const PlaceholderWithTracking = defineComponent({
       default: 300
     },
     onVisible: {
-      type: Function,
+      type: Function as PropType<() => void>,
       default: () => { }
     },
     height: {
@@ -29,7 +30,7 @@ const PlaceholderWithTracking = defineComponent({
       default: 0
     },
     placeholder:{
-      type: Object,
+      type: Object as PropType<VueNode>,
       default: () => { }
     }
   },

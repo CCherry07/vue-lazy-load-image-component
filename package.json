@@ -1,11 +1,11 @@
 {
   "name": "vue-lazy-load-image-component",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "vue-lazy-load-image-component",
-  "main": "lib/index.js",
+  "main": "lib/index.es.js",
   "exports": {
-    ".": "./lib/index.js",
-    "./lib/style.css": "./lib/style.css"
+    ".": "./lib/index.es.js",
+    "./lib/index.css": "./lib/index.css"
   },
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -16,6 +16,7 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged --allow-empty",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+    "prettier": "prettier -c --write **/*",
     "release": "standard-version"
   },
   "lint-staged": {

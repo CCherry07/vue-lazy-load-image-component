@@ -1,16 +1,19 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite'
-import dts from 'vite-plugin-dts'
-import vueJsx from '@vitejs/plugin-vue-jsx'
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [dts({
-    insertTypesEntry: true,
-    cleanVueFileName: true,
-    outputDir: 'lib',
-    staticImport: true,
-    exclude: ['**/__tests__/**/*', '**/__mocks__/**/*'],
-  }), vueJsx()],
+  plugins: [
+    dts({
+      insertTypesEntry: true,
+      cleanVueFileName: true,
+      outputDir: 'lib',
+      staticImport: true,
+      exclude: ['**/__tests__/**/*', '**/__mocks__/**/*'],
+    }),
+    vueJsx(),
+  ],
 
   test: {
     globals: true,
@@ -19,25 +22,27 @@ export default defineConfig({
       web: [/.[tj]sx$/],
     },
   },
-  
+
   build: {
     lib: {
-      entry: 'src/index.ts',
+      entry: ['src/index.ts'],
       name: 'vue-lazy-load-image-component',
-      fileName: 'index',
+      fileName: (format) => `index.${format}.js`,
       formats: ['es'],
     },
 
     rollupOptions: {
-      input: ['src/index.ts', 'src/effects/index.css'],
+      // input: ['src/index.ts']
+      input: { index: 'src/index.ts' },
       external: ['vue'],
       output: {
         dir: 'lib',
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
         },
-        format: 'es'
-      }
-    }
+        format: 'es',
+        assetFileNames: 'index.[ext]',
+      },
+    },
   },
-})
+});

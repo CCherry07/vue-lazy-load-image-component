@@ -15,7 +15,16 @@
     "serve": "vite preview",
     "test": "vitest"
   },
-  "keywords": [],
+  "keywords": [
+    "vue",
+    "vue3",
+    "vue3-component",
+    "lazyload",
+    "intersectionobserver",
+    "lazyload-image",
+    "lazyload-component",
+    "Vue-performance"
+  ],
   "author": "",
   "license": "ISC",
   "files": [

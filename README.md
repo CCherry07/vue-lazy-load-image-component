@@ -53,17 +53,22 @@ export default MyImage;
 
 They rely on CSS and the corresponding CSS file must be imported:
 
-```javascript
-import React from 'react';
+```vue
+<template>
+  <div>
+    <MyImage :image="image" />
+  </div>
+</template>
+<script lang='ts' setup>
 import { LazyLoadImage } from 'vue-lazy-load-image-component';
 import 'vue-lazy-load-image-component/lib/style.css';
-
-const MyImage = ({ image }) => (
-  <LazyLoadImage
-    alt={image.alt}
-    effect="blur"
-    src={image.src} />
-);
+const image = ref({
+  alt: 'My image',
+  height: 100,
+  src: 'https://example.com/image.jpg',
+  width: 100,
+});
+</script>
 ```
 
 The current available effects are:
@@ -82,21 +87,18 @@ The current available effects are:
 
 ## `LazyLoadComponent` usage
 
-```javascript
-import React from 'react';
-import { LazyLoadComponent } from 'vue-lazy-load-image-component';
-import { ArticleContent, ArticleComments } from 'my-app';
-
-const Article = ({ articleId }) => (
+```vue
+<template>
   <div>
-    <ArticleContent id={articleId} />
     <LazyLoadComponent>
-      <ArticleComments id={articleId} />
+      <MyComponent />
     </LazyLoadComponent>
   </div>
-);
-
-export default Article;
+</template>
+<script lang='ts' setup>
+import { LazyLoadComponent } from 'vue-lazy-load-image-component';
+import MyComponent from './MyComponent.vue';
+</script>
 ```
 
 ### Props
@@ -118,30 +120,37 @@ When you have many elements to lazy load in the same page, you might get poor pe
 
 For example, if we have an `App` which renders a `Gallery`, we would wrap the `Gallery` component with the HOC.
 
-```javascript
-import React from 'react';
-import { LazyLoadImage, trackWindowScroll }
-  from 'vue-lazy-load-image-component';
-
-const Gallery = ({ images, scrollPosition }) => (
+```vue
+<template>
   <div>
-    {images.map((image) =>
-      <LazyLoadImage
-        key={image.key}
-        alt={image.alt}
-        height={image.height}
-        // Make sure to pass down the scrollPosition,
-        // this will be used by the component to know
-        // whether it must track the scroll position or not
-        scrollPosition={scrollPosition}
-        src={image.src}
-        width={image.width} />
-    )}
+    <GalleryWithScrollTracking :images="images" />
   </div>
-);
+</template>
+<script lang='ts' setup>
+import { trackWindowScroll } from 'vue-lazy-load-image-component';
+import Gallery from './Gallery.vue';
 // Wrap Gallery with trackWindowScroll HOC so it receives
 // a scrollPosition prop to pass down to the images
-export default trackWindowScroll(Gallery);
+const images = ref([
+  {
+    alt: 'My image',
+    height: 100,
+    src: 'https://example.com/image.jpg',
+    width: 100,
+    scrollPosition:{x:0,y:0}
+  },
+  {
+    alt: 'My image 2',
+    height: 100,
+    src: 'https://example.com/image2.jpg',
+    width: 100,
+    scrollPosition:{x:0,y:0}
+  },
+]);
+
+const GalleryWithScrollTracking = trackWindowScroll(Gallery);
+
+</script>
 ```
 
 You must set the prop `scrollPosition` to the lazy load components. This way, they will know the scroll/resize events are tracked by a parent component and will not subscribe to them.
@@ -179,27 +188,35 @@ Imagine you are going to lazy-load an image you have already loaded in the same 
 
 Maybe the following code snippet will make it more clear:
 
-```javascript
-import React from 'react';
-import { LazyLoadImage, trackWindowScroll }
-  from 'vue-lazy-load-image-component';
-
-const Gallery = ({ images, scrollPosition }) => (
+```vue
+<template>
   <div>
-    // We are loading landscape.jpg here
     <img src="/landscape.jpg" alt="Beautiful landscape" />
-    {images.map((image) =>
-      <LazyLoadImage
-        key={image.key}
-        alt={image.alt}
-        scrollPosition={scrollPosition}
-        src={image.src}
-        // If the image we are creating here has the same src than before,
-        // we can directly display it with no need to lazy-load.
-        visibleByDefault={image.src === '/landscape.jpg'} />
-    )}
+    <GalleryWithScrollTracking :images="images" />
   </div>
-);
+</template>
+<script lang='ts' setup>
+import { trackWindowScroll } from 'vue-lazy-load-image-component';
+import Gallery from './Gallery.vue';
+const images = ref([
+  {
+    alt: 'My image',
+    height: 100,
+    src: 'https://example.com/image.jpg',
+    width: 100,
+  },
+  {
+    alt: 'My image 2',
+    height: 100,
+    src: 'https://example.com/image2.jpg',
+    width: 100,
+    // If the image we are creating here has the same src than before,
+    // we can directly display it with no need to lazy-load.
+    visibleByDefault:image.src === '/landscape.jpg',
+  },
+]);
 
-export default trackWindowScroll(Gallery);
+const GalleryWithScrollTracking = trackWindowScroll(Gallery);
+
+</script>
 ```

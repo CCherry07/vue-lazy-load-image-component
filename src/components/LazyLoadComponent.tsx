@@ -48,7 +48,7 @@ export default defineComponent({
       if (state.visible) {
         return slots.default?.()
       }
-      return isScrollTracked ||
+      return (isScrollTracked ||
         (props.useIntersectionObserver && isIntersectionObserverAvailable()) ?
         <PlaceholderWithoutTracking
           height={props.height}
@@ -68,7 +68,7 @@ export default defineComponent({
           threshold={props.threshold}
           useIntersectionObserver={props.useIntersectionObserver}
           width={props.width}
-        />
+        />)
     }
   }
 }) as DefineComponent<LazyLoadComponentProps>

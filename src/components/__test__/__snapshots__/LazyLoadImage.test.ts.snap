@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LazyLoadImage > should render correctly 1`] = `"<span class=\\"lazy-load-image-background\\" style=\\"color: transparent; display: inline-block; height: 100px; width: 100px;\\"><span style=\\"display: inline-block; height: 100px; width: 100px;\\"><!----></span></span>"`;
+
+exports[`LazyLoadImage > should render correctly with effect 1`] = `"<span class=\\"lazy-load-image-background blur\\" style=\\"color: transparent; display: inline-block; height: 100px; width: 100px;\\"><span style=\\"display: inline-block; height: 100px; width: 100px;\\"><!----></span></span>"`;

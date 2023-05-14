@@ -1,6 +1,6 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-// @ts-ignore
 import vueJsx from '@vitejs/plugin-vue-jsx'
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +11,15 @@ export default defineConfig({
     staticImport: true,
     exclude: ['**/__tests__/**/*', '**/__mocks__/**/*'],
   }), vueJsx()],
+
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    transformMode: {
+      web: [/.[tj]sx$/],
+    },
+  },
+  
   build: {
     lib: {
       entry: 'src/index.ts',
@@ -30,5 +39,5 @@ export default defineConfig({
         format: 'es'
       }
     }
-  }
+  },
 })

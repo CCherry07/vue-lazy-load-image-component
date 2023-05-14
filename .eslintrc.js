@@ -1,13 +1,15 @@
 module.exports = {
-  "env": {
-      "browser": true,
-      "es2021": true
+  env: {
+    browser: true,
+    es2021: true,
   },
-  "extends": [
-    'plugin:vue/vue3-recommended',
+  extends: [
+    "plugin:vue/vue3-recommended",
+    // 'prettier',
+    // 'plugin:prettier/recommended'
   ],
-  "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module"
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-}
+};

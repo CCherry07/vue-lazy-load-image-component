@@ -1,12 +1,11 @@
-
 ## Installation
 
 ```bash
 # Yarn
-$ yarn add vue-lazy-load-image-component
+$ pnpm add vue-lazy-load-image-component
 
-# NPM
-$ npm i --save vue-lazy-load-image-component
+# Pnpm
+$ pnpm i vue-lazy-load-image-component
 ```
 
 ## `LazyLoadImage` usage
@@ -15,38 +14,38 @@ $ npm i --save vue-lazy-load-image-component
 <template>
   <div>
     <MyImage :image="image" />
-    <span>{{image.caption}}</span>
+    <span>{{ image.caption }}</span>
   </div>
 </template>
-<script lang='ts' setup>
-import { LazyLoadImage } from 'vue-lazy-load-image-component';
+<script lang="ts" setup>
+import { LazyLoadImage } from "vue-lazy-load-image-component";
 const image = ref({
-  alt: 'My image',
+  alt: "My image",
   height: 100,
-  src: 'https://example.com/image.jpg',
+  src: "https://example.com/image.jpg",
   width: 100,
-  caption: 'My image caption',
+  caption: "My image caption",
 });
 </script>
 ```
 
 ### Props
 
-| Prop | Type | Default | Description |
-|:---|:---|:---|:---|
-| afterLoad | `Function` |  | Function called after the image has been completely loaded. |
-| beforeLoad | `Function` |  | Function called right before the placeholder is replaced with the image element. |
-| delayMethod | `String` | `throttle` | Method from lodash to use to delay the scroll/resize events. It can be `throttle` or `debounce`. |
-| delayTime | `Number` | 300 | Time in ms sent to the delayMethod. |
-| effect | `String` |  | Name of the effect to use. Please, read next section with an explanation on how to use them. |
-| placeholder | `ReactClass` | `<span>` | React element to use as a placeholder. |
-| placeholderSrc | `String` | | Image src to display while the image is not visible or loaded. |
-| threshold | `Number` | 100 | Threshold in pixels. So the image starts loading before it appears in the viewport. |
-| useIntersectionObserver | `Boolean` | true | Whether to use browser's IntersectionObserver when available. |
-| visibleByDefault | `Boolean` | false | Whether the image must be visible from the beginning. |
-| wrapperClassName | `String` |  | In some occasions (for example, when using a placeholderSrc) a wrapper span tag is rendered. This prop allows setting a class to that element. |
-| wrapperProps | `Object` | null | Props that should be passed to the wrapper span when it is rendered (for example, when using placeholderSrc or effect) |
-| ... |  |  | Any other image attribute |
+| Prop                    | Type         | Default    | Description                                                                                                                                    |
+| :---------------------- | :----------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| afterLoad               | `Function`   |            | Function called after the image has been completely loaded.                                                                                    |
+| beforeLoad              | `Function`   |            | Function called right before the placeholder is replaced with the image element.                                                               |
+| delayMethod             | `String`     | `throttle` | Method from lodash to use to delay the scroll/resize events. It can be `throttle` or `debounce`.                                               |
+| delayTime               | `Number`     | 300        | Time in ms sent to the delayMethod.                                                                                                            |
+| effect                  | `String`     |            | Name of the effect to use. Please, read next section with an explanation on how to use them.                                                   |
+| placeholder             | `ReactClass` | `<span>`   | React element to use as a placeholder.                                                                                                         |
+| placeholderSrc          | `String`     |            | Image src to display while the image is not visible or loaded.                                                                                 |
+| threshold               | `Number`     | 100        | Threshold in pixels. So the image starts loading before it appears in the viewport.                                                            |
+| useIntersectionObserver | `Boolean`    | true       | Whether to use browser's IntersectionObserver when available.                                                                                  |
+| visibleByDefault        | `Boolean`    | false      | Whether the image must be visible from the beginning.                                                                                          |
+| wrapperClassName        | `String`     |            | In some occasions (for example, when using a placeholderSrc) a wrapper span tag is rendered. This prop allows setting a class to that element. |
+| wrapperProps            | `Object`     | null       | Props that should be passed to the wrapper span when it is rendered (for example, when using placeholderSrc or effect)                         |
+| ...                     |              |            | Any other image attribute                                                                                                                      |
 
 ### Using effects
 
@@ -60,13 +59,13 @@ They rely on CSS and the corresponding CSS file must be imported:
     <MyImage :image="image" />
   </div>
 </template>
-<script lang='ts' setup>
-import { LazyLoadImage } from 'vue-lazy-load-image-component';
-import 'vue-lazy-load-image-component/lib/style.css';
+<script lang="ts" setup>
+import { LazyLoadImage } from "vue-lazy-load-image-component";
+import "vue-lazy-load-image-component/lib/style.css";
 const image = ref({
-  alt: 'My image',
+  alt: "My image",
   height: 100,
-  src: 'https://example.com/image.jpg',
+  src: "https://example.com/image.jpg",
   width: 100,
 });
 </script>
@@ -74,15 +73,15 @@ const image = ref({
 
 The current available effects are:
 
-* `blur`: renders a blurred image based on `placeholderSrc` and transitions to a non-blurred one when the image specified in the src is loaded.
+- `blur`: renders a blurred image based on `placeholderSrc` and transitions to a non-blurred one when the image specified in the src is loaded.
 
 ![Screenshot of the blur effect](https://user-images.githubusercontent.com/3616980/37790728-9f95529a-2e07-11e8-8ac3-5066c065e0af.gif)
 
-* `black-and-white`: renders a black and white image based on `placeholderSrc` and transitions to a colorful image when the image specified in the src is loaded.
+- `black-and-white`: renders a black and white image based on `placeholderSrc` and transitions to a colorful image when the image specified in the src is loaded.
 
 ![Screenshot of the black-and-white effect](https://user-images.githubusercontent.com/3616980/37790682-864e58d6-2e07-11e8-8984-ad5d7b056d9f.gif)
 
-* `opacity`: renders a blank space and transitions to full opacity when the image is loaded.
+- `opacity`: renders a blank space and transitions to full opacity when the image is loaded.
 
 ![Screenshot of the opacity effect](https://user-images.githubusercontent.com/3616980/37790755-b48a704a-2e07-11e8-91c3-fcd43a91e7b1.gif)
 
@@ -96,24 +95,24 @@ The current available effects are:
     </LazyLoadComponent>
   </div>
 </template>
-<script lang='ts' setup>
-import { LazyLoadComponent } from 'vue-lazy-load-image-component';
-import MyComponent from './MyComponent.vue';
+<script lang="ts" setup>
+import { LazyLoadComponent } from "vue-lazy-load-image-component";
+import MyComponent from "./MyComponent.vue";
 </script>
 ```
 
 ### Props
 
-| Prop | Type | Default | Description |
-|:---|:---|:---|:---|
-| afterLoad | `Function` |  | Function called after the component has been rendered. |
-| beforeLoad | `Function` |  | Function called right before the component is rendered. |
-| delayMethod | `String` | `throttle` | Method from lodash to use to delay the scroll/resize events. It can be `throttle` or `debounce`. |
-| delayTime | `Number` | 300 | Time in ms sent to the delayMethod from lodash. |
-| placeholder | `ReactClass` | `<span>` | React element to use as a placeholder. |
-| threshold | `Number` | 100 | Threshold in pixels. So the component starts loading before it appears in the viewport. |
-| useIntersectionObserver | `Boolean` | true | Whether to use browser's IntersectionObserver when available. |
-| visibleByDefault | `Boolean` | false | Whether the component must be visible from the beginning. |
+| Prop                    | Type         | Default    | Description                                                                                      |
+| :---------------------- | :----------- | :--------- | :----------------------------------------------------------------------------------------------- |
+| afterLoad               | `Function`   |            | Function called after the component has been rendered.                                           |
+| beforeLoad              | `Function`   |            | Function called right before the component is rendered.                                          |
+| delayMethod             | `String`     | `throttle` | Method from lodash to use to delay the scroll/resize events. It can be `throttle` or `debounce`. |
+| delayTime               | `Number`     | 300        | Time in ms sent to the delayMethod from lodash.                                                  |
+| placeholder             | `ReactClass` | `<span>`   | React element to use as a placeholder.                                                           |
+| threshold               | `Number`     | 100        | Threshold in pixels. So the component starts loading before it appears in the viewport.          |
+| useIntersectionObserver | `Boolean`    | true       | Whether to use browser's IntersectionObserver when available.                                    |
+| visibleByDefault        | `Boolean`    | false      | Whether the component must be visible from the beginning.                                        |
 
 ## Using `trackWindowScroll` HOC to improve performance
 
@@ -127,30 +126,29 @@ For example, if we have an `App` which renders a `Gallery`, we would wrap the `G
     <GalleryWithScrollTracking :images="images" />
   </div>
 </template>
-<script lang='ts' setup>
-import { trackWindowScroll } from 'vue-lazy-load-image-component';
-import Gallery from './Gallery.vue';
+<script lang="ts" setup>
+import { trackWindowScroll } from "vue-lazy-load-image-component";
+import Gallery from "./Gallery.vue";
 // Wrap Gallery with trackWindowScroll HOC so it receives
 // a scrollPosition prop to pass down to the images
 const images = ref([
   {
-    alt: 'My image',
+    alt: "My image",
     height: 100,
-    src: 'https://example.com/image.jpg',
+    src: "https://example.com/image.jpg",
     width: 100,
-    scrollPosition:{x:0,y:0}
+    scrollPosition: { x: 0, y: 0 },
   },
   {
-    alt: 'My image 2',
+    alt: "My image 2",
     height: 100,
-    src: 'https://example.com/image2.jpg',
+    src: "https://example.com/image2.jpg",
     width: 100,
-    scrollPosition:{x:0,y:0}
+    scrollPosition: { x: 0, y: 0 },
   },
 ]);
 
 const GalleryWithScrollTracking = trackWindowScroll(Gallery);
-
 </script>
 ```
 
@@ -160,24 +158,24 @@ You must set the prop `scrollPosition` to the lazy load components. This way, th
 
 `LazyLoadImage`
 
-| Prop | Type | Default | Description |
-|:---|:---|:---|:---|
-| scrollPosition | `Object` |  | Object containing `x` and `y` with the curent window scroll position. Required. |
-| afterLoad | `Function` |  | Function called after the image has been rendered. |
-| beforeLoad | `Function` |  | Function called right before the image is rendered. |
-| placeholder | `ReactClass` | `<span>` | React element to use as a placeholder. |
-| threshold | `Number` | 100 | Threshold in pixels. So the image starts loading before it appears in the viewport. |
-| visibleByDefault | `Boolean` | false | Whether the image must be visible from the beginning. |
-| wrapperProps | `Object` | null | Props that should be passed to the wrapper span when it is rendered (for example, when using placeholderSrc or effect) |
-| ... |  |  | Any other image attribute |
+| Prop             | Type         | Default  | Description                                                                                                            |
+| :--------------- | :----------- | :------- | :--------------------------------------------------------------------------------------------------------------------- |
+| scrollPosition   | `Object`     |          | Object containing `x` and `y` with the curent window scroll position. Required.                                        |
+| afterLoad        | `Function`   |          | Function called after the image has been rendered.                                                                     |
+| beforeLoad       | `Function`   |          | Function called right before the image is rendered.                                                                    |
+| placeholder      | `ReactClass` | `<span>` | React element to use as a placeholder.                                                                                 |
+| threshold        | `Number`     | 100      | Threshold in pixels. So the image starts loading before it appears in the viewport.                                    |
+| visibleByDefault | `Boolean`    | false    | Whether the image must be visible from the beginning.                                                                  |
+| wrapperProps     | `Object`     | null     | Props that should be passed to the wrapper span when it is rendered (for example, when using placeholderSrc or effect) |
+| ...              |              |          | Any other image attribute                                                                                              |
 
 Component wrapped with `trackWindowScroll` (in the example, `Gallery`)
 
-| Prop | Type | Default | Description |
-|:---|:---|:---|:---|
-| delayMethod | `String` | `throttle` | Method from lodash to use to delay the scroll/resize events. It can be `throttle` or `debounce`. |
-| delayTime | `Number` | 300 | Time in ms sent to the delayMethod from lodash. |
-| useIntersectionObserver | `Boolean` | true | Whether to use browser's IntersectionObserver when available. |
+| Prop                    | Type      | Default    | Description                                                                                      |
+| :---------------------- | :-------- | :--------- | :----------------------------------------------------------------------------------------------- |
+| delayMethod             | `String`  | `throttle` | Method from lodash to use to delay the scroll/resize events. It can be `throttle` or `debounce`. |
+| delayTime               | `Number`  | 300        | Time in ms sent to the delayMethod from lodash.                                                  |
+| useIntersectionObserver | `Boolean` | true       | Whether to use browser's IntersectionObserver when available.                                    |
 
 Notice you can do the same replacing `LazyLoadImage` with `LazyLoadComponent`.
 
@@ -196,32 +194,31 @@ Maybe the following code snippet will make it more clear:
     <GalleryWithScrollTracking :images="images" />
   </div>
 </template>
-<script lang='ts' setup>
-import { trackWindowScroll } from 'vue-lazy-load-image-component';
-import Gallery from './Gallery.vue';
+<script lang="ts" setup>
+import { trackWindowScroll } from "vue-lazy-load-image-component";
+import Gallery from "./Gallery.vue";
 const images = ref([
   {
-    alt: 'My image',
+    alt: "My image",
     height: 100,
-    src: 'https://example.com/image.jpg',
+    src: "https://example.com/image.jpg",
     width: 100,
   },
   {
-    alt: 'My image 2',
+    alt: "My image 2",
     height: 100,
-    src: 'https://example.com/image2.jpg',
+    src: "https://example.com/image2.jpg",
     width: 100,
     // If the image we are creating here has the same src than before,
     // we can directly display it with no need to lazy-load.
-    visibleByDefault:image.src === '/landscape.jpg',
+    visibleByDefault: image.src === "/landscape.jpg",
   },
 ]);
 
 const GalleryWithScrollTracking = trackWindowScroll(Gallery);
-
 </script>
 ```
 
 ## reference
 
-  [react-lazy-load-image-component]('https://github.com/Aljullu/react-lazy-load-image-component')
+[react-lazy-load-image-component]('https://github.com/Aljullu/react-lazy-load-image-component')

@@ -10,7 +10,7 @@ export default defineConfig({
     outputDir: 'lib',
     staticImport: true,
     exclude: ['**/__tests__/**/*', '**/__mocks__/**/*'],
-  }),vueJsx()],
+  }), vueJsx()],
   build: {
     lib: {
       entry: 'src/index.ts',
@@ -18,12 +18,12 @@ export default defineConfig({
       fileName: 'index',
       formats: ['es'],
     },
-    
+
     rollupOptions: {
-      input:['src/index.ts','src/effects/index.css'],
+      input: ['src/index.ts', 'src/effects/index.css'],
       external: ['vue'],
       output: {
-        dir:'lib',
+        dir: 'lib',
         globals: {
           vue: 'Vue'
         },

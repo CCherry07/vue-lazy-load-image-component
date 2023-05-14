@@ -1,7 +1,7 @@
 export const LAZY_LOAD_OBSERVERS: { [key: string]: any } = {};
 
 export const checkIntersections = (entries: any[]) => {
-  entries.forEach(entry => {
+  entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.onVisible();
     }

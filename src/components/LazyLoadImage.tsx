@@ -1,9 +1,12 @@
-import type { DefineComponent } from 'vue';
-import { ExtractPropTypes, computed, defineComponent, ref } from 'vue';
+import type { DefineComponent, ExtractPropTypes } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import LazyLoadComponent from './LazyLoadComponent.jsx';
 import { LazyLoadImagePropsFunc } from './interface.js';
-
-export type LazyLoadImageProps = Partial<ExtractPropTypes<ReturnType<typeof LazyLoadImagePropsFunc>>> & Partial<Omit<HTMLImageElement, 'style'>>
+import '../effects/index.css';
+export type LazyLoadImageProps = Partial<
+  ExtractPropTypes<ReturnType<typeof LazyLoadImagePropsFunc>>
+> &
+  Partial<Omit<HTMLImageElement, 'style'>>;
 
 const LazyLoadImage = defineComponent({
   name: 'LazyLoadImage',
@@ -14,12 +17,12 @@ const LazyLoadImage = defineComponent({
     const loaded = ref(false);
     function onImageLoad() {
       if (loaded.value) {
-        return null
+        return null;
       }
       return () => {
-        props.afterLoad?.()
-        loaded.value = true
-      }
+        props.afterLoad?.();
+        loaded.value = true;
+      };
     }
     function getImg() {
       const imgProps = computed(() => {
@@ -42,10 +45,10 @@ const LazyLoadImage = defineComponent({
           loadedClassName,
           ...imgProps
         } = props;
-        return imgProps
-      })
+        return imgProps;
+      });
       // @ts-ignore
-      return <img onLoad={onImageLoad()} {...imgProps.value} {...attrs} />
+      return <img onLoad={onImageLoad()} {...imgProps.value} {...attrs} />;
     }
     function getLazyLoadImage() {
       return (
@@ -65,25 +68,26 @@ const LazyLoadImage = defineComponent({
         >
           {getImg()}
         </LazyLoadComponent>
-      )
+      );
     }
-    const loadedClassName = computed(() => loaded.value ? ' lazy-load-image-loaded' : '')
+    const loadedClassName = computed(() => (loaded.value ? ' lazy-load-image-loaded' : ''));
     const wrapperBackground = computed(() => {
       if (loaded.value || !props.placeholderSrc) {
-        return {}
+        return {};
       }
       return {
         backgroundImage: `url(${props.placeholderSrc})`,
         backgroundSize: '100% 100%',
-      }
-    })
+      };
+    });
     function getWrappedLazyLoadImage(lazyLoadImage: any) {
       return (
         <span
           class={
             props.wrapperClassName +
             ' lazy-load-image-background ' +
-            props.effect + loadedClassName.value
+            props.effect +
+            loadedClassName.value
           }
           style={{
             ...wrapperBackground.value,
@@ -106,7 +110,7 @@ const LazyLoadImage = defineComponent({
         return lazyLoadImage;
       }
       return getWrappedLazyLoadImage(lazyLoadImage);
-    }
+    };
   },
 });
 

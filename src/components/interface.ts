@@ -1,69 +1,67 @@
-import { CSSProperties, PropType, VNode } from "vue"
+import type { CSSProperties, PropType, VNode } from 'vue';
 declare type VNodeChildAtom = VNode | string | number | boolean | null | undefined | void;
 export type VueNode = VNodeChildAtom | VNodeChildAtom[] | JSX.Element;
 export interface ScrollPosition {
-  x: number
-  y: number
+  x: number;
+  y: number;
 }
 export const LazyLoadComponentPropsFunc = () => ({
   afterLoad: {
     type: Function as PropType<() => void>,
-    default: () => { }
+    default: () => {},
   },
   beforeLoad: {
     type: Function as PropType<() => void>,
-    default: () => { }
+    default: () => {},
   },
   scrollPosition: {
     type: Object as PropType<ScrollPosition>,
-    default: null
+    default: null,
   },
   visibleByDefault: {
     type: Boolean,
-    default: false
+    default: false,
   },
   height: {
     type: Number,
-    default: 0
+    default: 0,
   },
   width: {
     type: Number,
-    default: 0
+    default: 0,
   },
   useIntersectionObserver: {
     type: Boolean,
-    default: true
+    default: true,
   },
   threshold: {
     type: Number,
-    default: 300
+    default: 300,
   },
   style: {
     type: Object as PropType<Partial<CSSProperties>>,
-    default: () => { }
+    default: () => {},
   },
   class: {
     type: String,
-    default: ''
+    default: '',
   },
   delayMethod: {
     type: String,
-    default: 'throttle'
+    default: 'throttle',
   },
   delayTime: {
     type: Number,
-    default: 300
+    default: 300,
   },
   placeholder: {
     type: Object as PropType<VueNode>,
-    default: () => { }
+    default: () => {},
   },
-})
+});
 
-
-export type Effect = 'blur' | 'black-and-white' | 'opacity'
+export type Effect = 'blur' | 'black-and-white' | 'opacity';
 export const LazyLoadImagePropsFunc = () => {
-
   return {
     ...LazyLoadComponentPropsFunc(),
     effect: {
@@ -86,68 +84,67 @@ export const LazyLoadImagePropsFunc = () => {
       type: String,
       default: '',
     },
-  }
-}
+  };
+};
 
 export const PlaceholderWithoutTrackingPropsFunc = () => ({
   scrollPosition: {
     type: Object as PropType<ScrollPosition>,
-    default: null
+    default: null,
   },
   useIntersectionObserver: {
     type: Boolean,
-    default: true
+    default: true,
   },
   threshold: {
     type: Number,
-    default: 300
+    default: 300,
   },
   onVisible: {
     type: Function as PropType<() => void>,
-    default: () => { }
+    default: () => {},
   },
   height: {
     type: Number,
-    default: 100
+    default: 100,
   },
   width: {
     type: Number,
-    default: 100
+    default: 100,
   },
   placeholder: {
     type: Object as PropType<VueNode>,
-    default: () => { }
-  }
-})
-
+    default: () => {},
+  },
+});
 
 export const PlaceholderWithTrackingPropsFunc = () => ({
   scrollPosition: {
     type: Object as PropType<ScrollPosition>,
-    default: null
+    default: null,
   },
   useIntersectionObserver: {
     type: Boolean,
-    default: true
+    default: true,
   },
   threshold: {
     type: Number,
-    default: 300
+    default: 300,
   },
   onVisible: {
     type: Function as PropType<() => void>,
-    default: () => { }
+    default: () => {},
   },
   height: {
     type: Number,
-    default: 0
+    default: 0,
   },
   width: {
     type: Number,
-    default: 0
+    default: 0,
   },
   placeholder: {
     type: Object as PropType<VueNode>,
-    default: () => { }
-  }
-})
+    default: () => {},
+  },
+});

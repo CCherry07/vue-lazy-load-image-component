@@ -1,11 +1,13 @@
-import { DefineComponent } from 'vue'
-import { reactive, computed, watch, defineComponent, ExtractPropTypes } from 'vue'
-import PlaceholderWithoutTracking from './PlaceholderWithoutTracking.tsx'
+import type { DefineComponent, ExtractPropTypes } from 'vue';
+import { reactive, computed, watch, defineComponent } from 'vue';
+import PlaceholderWithoutTracking from './PlaceholderWithoutTracking.tsx';
 import isIntersectionObserverAvailable from '../utils/intersection-observer';
-import PlaceholderWithTracking from './PlaceholderWithTracking.tsx'
-import { LazyLoadComponentPropsFunc } from "./interface.ts";
+import PlaceholderWithTracking from './PlaceholderWithTracking.tsx';
+import { LazyLoadComponentPropsFunc } from './interface.ts';
 
-export type LazyLoadComponentProps = Partial<ExtractPropTypes<ReturnType<typeof LazyLoadComponentPropsFunc>>>
+export type LazyLoadComponentProps = Partial<
+  ExtractPropTypes<ReturnType<typeof LazyLoadComponentPropsFunc>>
+>;
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -17,39 +19,42 @@ export default defineComponent({
       visible: props.visibleByDefault ?? false,
       loaded: false,
       error: false,
-    })
-    const isScrollTracked = computed(() => Boolean(
-      props.scrollPosition &&
-      Number.isFinite(props.scrollPosition.x) &&
-      props.scrollPosition.x >= 0 &&
-      Number.isFinite(props.scrollPosition.y) &&
-      props.scrollPosition.y >= 0
-    ))
+    });
+    const isScrollTracked = computed(() =>
+      Boolean(
+        props.scrollPosition &&
+          Number.isFinite(props.scrollPosition.x) &&
+          props.scrollPosition.x >= 0 &&
+          Number.isFinite(props.scrollPosition.y) &&
+          props.scrollPosition.y >= 0,
+      ),
+    );
 
-    watch(state,
+    watch(
+      state,
       (prevState, state) => {
         if (prevState.visible !== state?.visible) {
           props.afterLoad?.();
         }
       },
-      { immediate: true }
-    )
+      { immediate: true },
+    );
 
     const onVisible = () => {
-      state.visible = true
-      props.afterLoad?.()
-    }
+      state.visible = true;
+      props.afterLoad?.();
+    };
 
     if (props.visibleByDefault) {
-      props.beforeLoad?.()
-      props.afterLoad?.()
+      props.beforeLoad?.();
+      props.afterLoad?.();
     }
     return () => {
       if (state.visible) {
-        return slots.default?.()
+        return slots.default?.();
       }
-      return (isScrollTracked ||
-        (props.useIntersectionObserver && isIntersectionObserverAvailable()) ?
+      return isScrollTracked.value ||
+        (props.useIntersectionObserver && isIntersectionObserverAvailable()) ? (
         <PlaceholderWithoutTracking
           height={props.height}
           onVisible={onVisible}
@@ -59,7 +64,7 @@ export default defineComponent({
           useIntersectionObserver={props.useIntersectionObserver}
           width={props.width}
         />
-        :
+      ) : (
         <PlaceholderWithTracking
           height={props.height}
           onVisible={onVisible}
@@ -68,8 +73,8 @@ export default defineComponent({
           threshold={props.threshold}
           useIntersectionObserver={props.useIntersectionObserver}
           width={props.width}
-        />)
-    }
-  }
-}) as DefineComponent<LazyLoadComponentProps>
-
+        />
+      );
+    };
+  },
+}) as DefineComponent<LazyLoadComponentProps>;

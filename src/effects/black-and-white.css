@@ -4,7 +4,7 @@
 
 .lazy-load-image-background.black-and-white.lazy-load-image-loaded {
   filter: grayscale(0);
-  transition: filter .3s;
+  transition: filter 0.3s;
 }
 
 .lazy-load-image-background.black-and-white > img {
@@ -13,5 +13,5 @@
 
 .lazy-load-image-background.black-and-white.lazy-load-image-loaded > img {
   opacity: 1;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }

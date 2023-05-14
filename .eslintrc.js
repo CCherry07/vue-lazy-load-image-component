@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: ['plugin:vue/vue3-recommended', 'prettier', 'plugin:prettier/recommended'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',

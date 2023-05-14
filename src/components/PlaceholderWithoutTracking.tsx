@@ -1,23 +1,24 @@
-import type { DefineComponent } from 'vue'
-import { computed, onMounted, shallowRef, defineComponent } from 'vue'
+import type { DefineComponent } from 'vue';
+import { computed, onMounted, shallowRef, defineComponent } from 'vue';
 
-import isIntersectionObserverAvailable from '../utils/intersection-observer'
-import { getObserver } from '../utils'
-import { PlaceholderWithoutTrackingPropsFunc } from './interface'
+import isIntersectionObserverAvailable from '../utils/intersection-observer';
+import { getObserver } from '../utils';
+import { PlaceholderWithoutTrackingPropsFunc } from './interface';
 
 export default defineComponent({
   name: 'PlaceholderWithoutTracking',
   props: PlaceholderWithoutTrackingPropsFunc(),
   setup(props) {
-    const placeholder = shallowRef<HTMLElement>()
-    const supportsObserver = computed(() => !props.scrollPosition &&
-      props.useIntersectionObserver &&
-      isIntersectionObserverAvailable())
+    const placeholder = shallowRef<HTMLElement>();
+    const supportsObserver = computed(
+      () =>
+        !props.scrollPosition && props.useIntersectionObserver && isIntersectionObserverAvailable(),
+    );
 
     const observer = computed(() => {
-      if (!supportsObserver.value) return null
-      return getObserver(props.threshold)
-    })
+      if (!supportsObserver.value) return null;
+      return getObserver(props.threshold);
+    });
 
     function getPlaceholderBoundingBox(scrollPosition = props.scrollPosition) {
       const boundingRect = placeholder.value!.getBoundingClientRect();
@@ -48,9 +49,9 @@ export default defineComponent({
 
       return Boolean(
         viewport.top - props.threshold <= boundingBox.bottom &&
-        viewport.bottom + props.threshold >= boundingBox.top &&
-        viewport.left - props.threshold <= boundingBox.right &&
-        viewport.right + props.threshold >= boundingBox.left
+          viewport.bottom + props.threshold >= boundingBox.top &&
+          viewport.left - props.threshold <= boundingBox.right &&
+          viewport.right + props.threshold >= boundingBox.left,
       );
     }
     function updateVisibility() {
@@ -61,31 +62,28 @@ export default defineComponent({
     onMounted(() => {
       if (observer.value && placeholder.value) {
         // @ts-ignore
-        placeholder.value.onVisible = props.onVisible
-        observer.value.observe(placeholder.value)
+        placeholder.value.onVisible = props.onVisible;
+        observer.value.observe(placeholder.value);
       }
       if (!supportsObserver.value) {
-        updateVisibility?.()
+        updateVisibility?.();
       }
-    })
+    });
 
     const styleProp = computed(() => {
       return {
         display: 'inline-block',
         height: `${props.height}px`,
         width: `${props.width}px`,
-      }
+      };
     });
 
     return () => {
       return (
-        <span
-          ref={placeholder}
-          style={styleProp.value}
-        >
+        <span ref={placeholder} style={styleProp.value}>
           {props.placeholder}
         </span>
-      )
-    }
-  }
-}) as DefineComponent<ReturnType<typeof PlaceholderWithoutTrackingPropsFunc>>
+      );
+    };
+  },
+}) as DefineComponent<ReturnType<typeof PlaceholderWithoutTrackingPropsFunc>>;

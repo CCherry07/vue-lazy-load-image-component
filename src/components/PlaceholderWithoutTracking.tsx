@@ -46,7 +46,6 @@ export default defineComponent({
         right: props.scrollPosition.x + window.innerWidth,
         top: props.scrollPosition.y,
       };
-
       return Boolean(
         viewport.top - props.threshold <= boundingBox.bottom &&
           viewport.bottom + props.threshold >= boundingBox.top &&
@@ -77,8 +76,6 @@ export default defineComponent({
         width: `${props.width}px`,
       };
     });
-    console.log('props', props);
-
     return () => {
       return (
         <span ref={placeholder} style={styleProp.value}>

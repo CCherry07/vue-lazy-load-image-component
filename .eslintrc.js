@@ -10,6 +10,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    "prettier/prettier": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
   },
   overrides: [

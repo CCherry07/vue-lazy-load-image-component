@@ -18,7 +18,7 @@ export type TrackWindowScroll = (
 ) => ReturnType<typeof defineComponent>;
 
 export const trackWindowScroll: TrackWindowScroll = (Component) => {
-  const ScrollAwareComponent = defineComponent({
+  return defineComponent({
     name: 'ScrollAwareComponent',
     props: LazyLoadComponentPropsFunc(),
     setup(props, { attrs }) {
@@ -92,7 +92,6 @@ export const trackWindowScroll: TrackWindowScroll = (Component) => {
       );
     },
   });
-  return ScrollAwareComponent;
 };
 
 export default trackWindowScroll;

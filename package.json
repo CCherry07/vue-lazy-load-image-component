@@ -1,13 +1,14 @@
 {
   "name": "vue-lazy-load-image-component",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "vue-lazy-load-image-component",
-  "main": "lib/index.es.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
-    ".": "./lib/index.es.js",
+    ".": "./lib/index.js",
     "./lib/index.css": "./lib/index.css"
   },
-  "types": "./lib/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

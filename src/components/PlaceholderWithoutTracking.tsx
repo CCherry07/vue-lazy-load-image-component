@@ -77,6 +77,7 @@ export default defineComponent({
         width: `${props.width}px`,
       };
     });
+    console.log('props', props);
 
     return () => {
       return (

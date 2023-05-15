@@ -1,3 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`LazyLoadComponent 1`] = `"<span style=\\"display: inline-block; height: 100px; width: 100px;\\"><!----></span>"`;

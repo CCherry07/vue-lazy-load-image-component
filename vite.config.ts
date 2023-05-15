@@ -27,7 +27,7 @@ export default defineConfig({
     lib: {
       entry: ['src/index.ts'],
       name: 'vue-lazy-load-image-component',
-      fileName: (format) => `index.${format}.js`,
+      fileName: 'index',
       formats: ['es'],
     },
 

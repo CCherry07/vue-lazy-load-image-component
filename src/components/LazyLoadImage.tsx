@@ -15,12 +15,12 @@ const LazyLoadImage = defineComponent({
   props: LazyLoadImagePropsFunc(),
   setup(props, { attrs }) {
     const loaded = ref(false);
-    function onImageLoad() {
+    function onImageLoad(): ((payload: Event) => void) | undefined {
       if (loaded.value) {
-        return null;
+        return undefined;
       }
-      return () => {
-        props.afterLoad?.();
+      return (e) => {
+        props.afterLoad?.(e);
         loaded.value = true;
       };
     }
@@ -47,8 +47,9 @@ const LazyLoadImage = defineComponent({
         } = props;
         return imgProps;
       });
-      // @ts-ignore
-      return <img onLoad={onImageLoad()} {...imgProps.value} {...attrs} />;
+      return (
+        <img onLoad={onImageLoad()} onError={props.onImageError} {...imgProps.value} {...attrs} />
+      );
     }
     function getLazyLoadImage() {
       return (
@@ -80,7 +81,7 @@ const LazyLoadImage = defineComponent({
         backgroundSize: '100% 100%',
       };
     });
-    function getWrappedLazyLoadImage(lazyLoadImage: any) {
+    function getWrappedLazyLoadImage(lazyLoadImage: ReturnType<typeof getLazyLoadImage>) {
       return (
         <span
           class={

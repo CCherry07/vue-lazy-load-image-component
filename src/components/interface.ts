@@ -7,7 +7,7 @@ export interface ScrollPosition {
 }
 export const LazyLoadComponentPropsFunc = () => ({
   afterLoad: {
-    type: Function as PropType<() => void>,
+    type: Function as PropType<(payload?: Event) => void>,
     default: () => {},
   },
   beforeLoad: {
@@ -64,6 +64,10 @@ export type Effect = 'blur' | 'black-and-white' | 'opacity';
 export const LazyLoadImagePropsFunc = () => {
   return {
     ...LazyLoadComponentPropsFunc(),
+    onImageError: {
+      type: Function as PropType<(payload: Event) => void>,
+      default: () => {},
+    },
     effect: {
       type: String as PropType<Effect>,
       default: '',

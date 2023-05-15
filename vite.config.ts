@@ -27,13 +27,12 @@ export default defineConfig({
     lib: {
       entry: ['src/index.ts'],
       name: 'vue-lazy-load-image-component',
-      fileName: 'index',
+      fileName: () => 'index.js',
       formats: ['es'],
     },
 
     rollupOptions: {
-      // input: ['src/index.ts']
-      input: { index: 'src/index.ts' },
+      input: ['src/index.ts'],
       external: ['vue'],
       output: {
         dir: 'lib',
@@ -41,7 +40,6 @@ export default defineConfig({
           vue: 'Vue',
         },
         format: 'es',
-        assetFileNames: 'index.[ext]',
       },
     },
   },

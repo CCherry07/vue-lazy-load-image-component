@@ -7,7 +7,7 @@
   "types": "lib/index.d.ts",
   "exports": {
     ".": "./lib/index.js",
-    "./lib/index.css": "./lib/index.css"
+    "./lib/style.css": "./lib/style.css"
   },
   "scripts": {
     "dev": "vite",

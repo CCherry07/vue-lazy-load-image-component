@@ -63,6 +63,8 @@ export default defineComponent({
           threshold={props.threshold}
           useIntersectionObserver={props.useIntersectionObserver}
           width={props.width}
+          style={props.style}
+          class={props.class}
         />
       ) : (
         <PlaceholderWithTracking
@@ -73,6 +75,8 @@ export default defineComponent({
           threshold={props.threshold}
           useIntersectionObserver={props.useIntersectionObserver}
           width={props.width}
+          style={props.style}
+          class={props.class}
         />
       );
     };

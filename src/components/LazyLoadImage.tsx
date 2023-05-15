@@ -10,8 +10,8 @@ export type LazyLoadImageProps = Partial<
 
 const LazyLoadImage = defineComponent({
   name: 'LazyLoadImage',
-  compatConfig: { MODE: 3 },
   inheritAttrs: false,
+  compatConfig: { MODE: 3 },
   props: LazyLoadImagePropsFunc(),
   setup(props, { attrs }) {
     const loaded = ref(false);
@@ -27,7 +27,6 @@ const LazyLoadImage = defineComponent({
     function getImg() {
       const imgProps = computed(() => {
         const {
-          class: className,
           afterLoad,
           beforeLoad,
           delayMethod,
@@ -41,8 +40,8 @@ const LazyLoadImage = defineComponent({
           visibleByDefault,
           wrapperClassName,
           wrapperProps,
-          style,
           loadedClassName,
+          onImageError,
           ...imgProps
         } = props;
         return imgProps;
@@ -103,7 +102,6 @@ const LazyLoadImage = defineComponent({
         </span>
       );
     }
-
     return () => {
       const lazyLoadImage = getLazyLoadImage();
       const needsWrapper = (props.effect || props.placeholderSrc) && !props.visibleByDefault;

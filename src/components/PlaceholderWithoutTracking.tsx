@@ -7,6 +7,7 @@ import { PlaceholderWithoutTrackingPropsFunc } from './interface';
 
 export default defineComponent({
   name: 'PlaceholderWithoutTracking',
+  inheritAttrs: false,
   props: PlaceholderWithoutTrackingPropsFunc(),
   setup(props) {
     const placeholder = shallowRef<HTMLElement>();
@@ -74,6 +75,7 @@ export default defineComponent({
         display: 'inline-block',
         height: `${props.height}px`,
         width: `${props.width}px`,
+        ...props.style,
       };
     });
     return () => {

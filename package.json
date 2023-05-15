@@ -1,6 +1,6 @@
 {
   "name": "vue-lazy-load-image-component",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "vue-lazy-load-image-component",
   "main": "lib/index.js",
   "module": "lib/index.js",

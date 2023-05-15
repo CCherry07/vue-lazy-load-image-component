@@ -92,6 +92,14 @@ export const LazyLoadImagePropsFunc = () => {
 };
 
 export const PlaceholderWithoutTrackingPropsFunc = () => ({
+  style: {
+    type: Object as PropType<Partial<CSSProperties>>,
+    default: () => {},
+  },
+  class: {
+    type: String,
+    default: '',
+  },
   scrollPosition: {
     type: Object as PropType<ScrollPosition>,
     default: null,

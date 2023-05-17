@@ -1,9 +1,10 @@
 export const LAZY_LOAD_OBSERVERS: { [key: string]: any } = {};
 
-export const checkIntersections = (entries: any[]) => {
+export const checkIntersections: IntersectionObserverCallback = (entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      entry.target.onVisible();
+      // @ts-ignore
+      entry.target.onVisible(entry);
     }
   });
 };

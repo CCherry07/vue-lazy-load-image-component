@@ -9,7 +9,7 @@ export default defineComponent({
   name: 'PlaceholderWithoutTracking',
   inheritAttrs: false,
   props: PlaceholderWithoutTrackingPropsFunc(),
-  setup(props) {
+  setup(props, { emit }) {
     const placeholder = shallowRef<HTMLElement>();
     const supportsObserver = computed(
       () =>
@@ -56,7 +56,7 @@ export default defineComponent({
     }
     function updateVisibility() {
       if (isPlaceholderInViewport()) {
-        props.onVisible?.();
+        emit('visible');
       }
     }
     onMounted(() => {

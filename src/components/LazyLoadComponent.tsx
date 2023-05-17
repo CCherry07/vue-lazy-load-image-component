@@ -14,12 +14,13 @@ export default defineComponent({
   name: 'LazyLoadComponent',
   inheritAttrs: false,
   props: LazyLoadComponentPropsFunc(),
-  setup(props, { slots }) {
+  setup(props, { slots, emit }) {
     const state = reactive({
       visible: props.visibleByDefault ?? false,
       loaded: false,
       error: false,
     });
+
     const isScrollTracked = computed(() =>
       Boolean(
         props.scrollPosition &&
@@ -34,20 +35,21 @@ export default defineComponent({
       state,
       (prevState, state) => {
         if (prevState.visible !== state?.visible) {
-          props.afterLoad?.();
+          emit('afterLoad');
         }
       },
       { immediate: true },
     );
 
-    const onVisible = () => {
+    const onVisible = (entry: IntersectionObserverEntry) => {
       state.visible = true;
-      props.afterLoad?.();
+      emit('afterLoad');
+      emit('visible', entry);
     };
 
     if (props.visibleByDefault) {
-      props.beforeLoad?.();
-      props.afterLoad?.();
+      emit('beforeLoad');
+      emit('afterLoad');
     }
     return () => {
       if (state.visible) {

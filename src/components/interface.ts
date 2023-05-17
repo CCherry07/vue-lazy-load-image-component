@@ -6,12 +6,16 @@ export interface ScrollPosition {
   y: number;
 }
 export const LazyLoadComponentPropsFunc = () => ({
-  afterLoad: {
+  onAfterLoad: {
     type: Function as PropType<(payload?: Event) => void>,
     default: () => {},
   },
-  beforeLoad: {
+  onBeforeLoad: {
     type: Function as PropType<() => void>,
+    default: () => {},
+  },
+  onVisible: {
+    type: Function as PropType<(entry: IntersectionObserverEntry) => void>,
     default: () => {},
   },
   scrollPosition: {
@@ -113,7 +117,7 @@ export const PlaceholderWithoutTrackingPropsFunc = () => ({
     default: 300,
   },
   onVisible: {
-    type: Function as PropType<() => void>,
+    type: Function as PropType<(entry: IntersectionObserverEntry) => void>,
     default: () => {},
   },
   height: {
@@ -144,7 +148,7 @@ export const PlaceholderWithTrackingPropsFunc = () => ({
     default: 300,
   },
   onVisible: {
-    type: Function as PropType<() => void>,
+    type: Function as PropType<(entry: IntersectionObserverEntry) => void>,
     default: () => {},
   },
   height: {

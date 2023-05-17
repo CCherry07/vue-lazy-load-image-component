@@ -13,22 +13,34 @@ const LazyLoadImage = defineComponent({
   inheritAttrs: false,
   compatConfig: { MODE: 3 },
   props: LazyLoadImagePropsFunc(),
-  setup(props, { attrs }) {
+  setup(props, { emit, attrs }) {
     const loaded = ref(false);
     function onImageLoad(): ((payload: Event) => void) | undefined {
       if (loaded.value) {
         return undefined;
       }
       return (e) => {
-        props.afterLoad?.(e);
+        emit('afterLoad', e);
         loaded.value = true;
       };
     }
+
+    const onImageError = (e: Event) => {
+      emit('imageError', e);
+    };
+
+    const onVisible = (entry: IntersectionObserverEntry) => {
+      emit('visible', entry);
+    };
+    const onBeforeLoad = () => {
+      emit('beforeLoad');
+    };
     function getImg() {
       const imgProps = computed(() => {
         const {
-          afterLoad,
-          beforeLoad,
+          onAfterLoad,
+          onBeforeLoad,
+          onVisible,
           delayMethod,
           delayTime,
           effect,
@@ -46,14 +58,13 @@ const LazyLoadImage = defineComponent({
         } = props;
         return imgProps;
       });
-      return (
-        <img onLoad={onImageLoad()} onError={props.onImageError} {...imgProps.value} {...attrs} />
-      );
+      return <img onLoad={onImageLoad()} onError={onImageError} {...imgProps.value} {...attrs} />;
     }
     function getLazyLoadImage() {
       return (
         <LazyLoadComponent
-          beforeLoad={props.beforeLoad}
+          onVisible={onVisible}
+          onBeforeLoad={onBeforeLoad}
           class={props.class}
           delayMethod={props.delayMethod}
           delayTime={props.delayTime}

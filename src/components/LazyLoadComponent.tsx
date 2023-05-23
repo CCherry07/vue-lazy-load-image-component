@@ -22,7 +22,7 @@ export default defineComponent({
     });
 
     const isScrollTracked = computed(() =>
-      Boolean(
+      !!(
         props.scrollPosition &&
           Number.isFinite(props.scrollPosition.x) &&
           props.scrollPosition.x >= 0 &&

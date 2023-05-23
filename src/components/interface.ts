@@ -68,16 +68,16 @@ export type Effect = 'blur' | 'black-and-white' | 'opacity';
 export const LazyLoadImagePropsFunc = () => {
   return {
     ...LazyLoadComponentPropsFunc(),
+    placeholderSrc: {
+      type: String,
+      default: '',
+    },
     onImageError: {
       type: Function as PropType<(payload: Event) => void>,
       default: () => {},
     },
     effect: {
       type: String as PropType<Effect>,
-      default: '',
-    },
-    placeholderSrc: {
-      type: String,
       default: '',
     },
     wrapperClassName: {
@@ -94,73 +94,3 @@ export const LazyLoadImagePropsFunc = () => {
     },
   };
 };
-
-export const PlaceholderWithoutTrackingPropsFunc = () => ({
-  style: {
-    type: Object as PropType<Partial<CSSProperties>>,
-    default: () => {},
-  },
-  class: {
-    type: String,
-    default: '',
-  },
-  scrollPosition: {
-    type: Object as PropType<ScrollPosition>,
-    default: null,
-  },
-  useIntersectionObserver: {
-    type: Boolean,
-    default: true,
-  },
-  threshold: {
-    type: Number,
-    default: 300,
-  },
-  onVisible: {
-    type: Function as PropType<(entry: IntersectionObserverEntry) => void>,
-    default: () => {},
-  },
-  height: {
-    type: Number,
-    default: 100,
-  },
-  width: {
-    type: Number,
-    default: 100,
-  },
-  placeholder: {
-    type: Object as PropType<VueNode>,
-    default: () => {},
-  },
-});
-
-export const PlaceholderWithTrackingPropsFunc = () => ({
-  scrollPosition: {
-    type: Object as PropType<ScrollPosition>,
-    default: null,
-  },
-  useIntersectionObserver: {
-    type: Boolean,
-    default: true,
-  },
-  threshold: {
-    type: Number,
-    default: 300,
-  },
-  onVisible: {
-    type: Function as PropType<(entry: IntersectionObserverEntry) => void>,
-    default: () => {},
-  },
-  height: {
-    type: Number,
-    default: 0,
-  },
-  width: {
-    type: Number,
-    default: 0,
-  },
-  placeholder: {
-    type: Object as PropType<VueNode>,
-    default: () => {},
-  },
-});

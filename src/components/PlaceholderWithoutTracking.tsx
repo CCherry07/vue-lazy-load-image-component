@@ -3,12 +3,12 @@ import { computed, onMounted, shallowRef, defineComponent } from 'vue';
 
 import isIntersectionObserverAvailable from '../utils/intersection-observer';
 import { getObserver } from '../utils';
-import { PlaceholderWithoutTrackingPropsFunc } from './interface';
+import { LazyLoadComponentPropsFunc } from './interface';
 
 export default defineComponent({
   name: 'PlaceholderWithoutTracking',
   inheritAttrs: false,
-  props: PlaceholderWithoutTrackingPropsFunc(),
+  props: LazyLoadComponentPropsFunc(),
   setup(props, { emit }) {
     const placeholder = shallowRef<HTMLElement>();
     const supportsObserver = computed(
@@ -86,4 +86,4 @@ export default defineComponent({
       );
     };
   },
-}) as DefineComponent<ReturnType<typeof PlaceholderWithoutTrackingPropsFunc>>;
+}) as DefineComponent<ReturnType<typeof LazyLoadComponentPropsFunc>>;

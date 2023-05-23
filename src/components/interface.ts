@@ -1,6 +1,8 @@
 import type { CSSProperties, PropType, VNode } from 'vue';
 declare type VNodeChildAtom = VNode | string | number | boolean | null | undefined | void;
 export type VueNode = VNodeChildAtom | VNodeChildAtom[] | JSX.Element;
+export type Effect = 'blur' | 'black-and-white' | 'opacity';
+
 export interface ScrollPosition {
   x: number;
   y: number;
@@ -64,7 +66,6 @@ export const LazyLoadComponentPropsFunc = () => ({
   },
 });
 
-export type Effect = 'blur' | 'black-and-white' | 'opacity';
 export const LazyLoadImagePropsFunc = () => {
   return {
     ...LazyLoadComponentPropsFunc(),

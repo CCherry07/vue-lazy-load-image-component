@@ -2,7 +2,7 @@
 
 ```bash
 # Yarn
-$ pnpm add vue-lazy-load-image-component
+$ yarn add vue-lazy-load-image-component
 
 # Pnpm
 $ pnpm i vue-lazy-load-image-component
